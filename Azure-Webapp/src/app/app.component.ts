@@ -19,18 +19,11 @@ export class AppComponent implements OnInit {
     this.isIframe = window !== window.parent && !window.opener;
   }
 
-  options = {
-    headers: "",
-    observe: "response", // to display the full response
-    responseType: "json"
-  };
-
   login() {
     this.authService.loginPopup()
       .subscribe({
         next: (result) => {
           console.log(result);
-          this.options.headers = result.accessToken;
           this.setLoginDisplay();
         },
         error: (error) => console.log(error)
