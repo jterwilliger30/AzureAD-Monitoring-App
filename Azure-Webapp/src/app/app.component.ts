@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
           let headers = new HttpHeaders({
             'Authorization': "Bearer " + result.accessToken,
             'Content-Type': 'application/json'});
-          this.http.get("https://graph.microsoft.com/v1.0/auditLogs/signIns?&$filter=startsWith(userPrincipalName,'<INSERT USERID>')", { headers: headers }).subscribe(data => {
+          this.http.get("https://graph.microsoft.com/v1.0/auditLogs/signIns?&$filter=startsWith(userPrincipalName,'jpta2020')", { headers: headers }).subscribe(data => {
             this.ret_data = data;
             console.log(data);
             var i

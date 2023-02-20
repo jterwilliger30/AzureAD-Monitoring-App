@@ -12,7 +12,6 @@ import { MatListModule } from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { RawdataComponent } from './rawdata/rawdata.component';
 
 import { MsalModule } from '@azure/msal-angular';
@@ -24,10 +23,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     RawdataComponent,
-    
-
   ],
   imports: [
     BrowserModule,
