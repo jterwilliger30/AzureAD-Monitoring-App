@@ -1,20 +1,17 @@
-<!---
-<ul>
-    <li><a routerLink='/home'>Home</a></li>
-    <li><a routerLink='/login'>Login</a></li>
-    <li><a href="/rawdata">Raw Data</a></li>
-    <li><a href="about.asp">About</a></li>
-</ul> 
--->
+
 
 <mat-toolbar color="primary">
-  
     <div class="toolbar-spacer"></div>
-  
-    <a mat-button [routerLink]="['home']">Query</a>
-    <a mat-button [routerLink]="['rawdata']">RawData</a>
-  
-    <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+
+    <form>
+      <label *ngIf="loginDisplay">UserID: </label>
+      <input type="text" name="userID" (change)="formChanged()" *ngIf="loginDisplay">
+      <button type="button" mat-raised-button *ngIf="loginDisplay" (click)="query_user()">Query</button>
+    </form>
+    <div></div>
+
+   
+    <button type="button" mat-raised-button color="warn" *ngIf="!loginDisplay" (click)="login()">Login</button>
   
 </mat-toolbar>
   <div class="container">

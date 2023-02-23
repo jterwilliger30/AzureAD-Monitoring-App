@@ -12,7 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RawdataComponent } from './rawdata/rawdata.component';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field'
 
 import { MsalModule } from '@azure/msal-angular';
 import { PublicClientApplication } from '@azure/msal-browser';
@@ -23,7 +23,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   declarations: [
     AppComponent,
     HomeComponent,
-    RawdataComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +31,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
+    MatFormFieldModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
         clientId: 'b6c1c84e-7526-4baa-8fa4-1159818806e1', // Application (client) ID from the app registration

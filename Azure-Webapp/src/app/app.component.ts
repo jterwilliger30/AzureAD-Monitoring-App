@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,38 @@ export class AppComponent implements OnInit {
   isIframe = false;
   loginDisplay = false;
 
-  constructor(private authService: MsalService, private http : HttpClient) { }
+  constructor(private authService: MsalService, private http : HttpClient, private formBuilder : FormBuilder) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
   }
 
-  ret_data : Object;
+  MS_JSON : object;
+
+  token : string;
+  userID : string;
+
+  formChanged() {
+    this.userID = (document.getElementsByName("userID")[0] as HTMLInputElement).value;
+  }
+
+  query_user() {
+    console.log(this.userID);
+    document.getElementById('demo').innerHTML = "Loading..."
+    let headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.token,
+      'Content-Type': 'application/json'});
+    this.http.get("https://graph.microsoft.com/v1.0/auditLogs/signIns?&$filter=startsWith(userPrincipalName,'" + this.userID + "')", { headers: headers }).subscribe(data => {
+      console.log(data);
+      var i
+      var x = ''
+      this.MS_JSON = data;
+      for (i in data['value']) {
+          x += "<p>" + i + "<span class=\"nums\">" + JSON.stringify(data['value'][i]) + "</span>" + "</p>"
+      }
+      document.getElementById('demo').innerHTML = x
+    });
+  }
 
   login() {
     this.authService.loginPopup()
@@ -27,20 +53,7 @@ export class AppComponent implements OnInit {
         next: (result) => {
           console.log(result);
           this.setLoginDisplay();
-
-          let headers = new HttpHeaders({
-            'Authorization': "Bearer " + result.accessToken,
-            'Content-Type': 'application/json'});
-          this.http.get("https://graph.microsoft.com/v1.0/auditLogs/signIns?&$filter=startsWith(userPrincipalName,'jpta2020')", { headers: headers }).subscribe(data => {
-            this.ret_data = data;
-            console.log(data);
-            var i
-            var x = ''
-            for (i in data['value']) {
-                x += "<p>" + i + "<span class=\"nums\">" + JSON.stringify(data['value'][i]) + "</span>" + "</p>"
-            }
-            document.getElementById('demo').innerHTML = x
-          });
+          this.token = result.accessToken;
         },
         error: (error) => console.log(error)
       });
