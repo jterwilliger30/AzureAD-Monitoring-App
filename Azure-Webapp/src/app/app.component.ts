@@ -41,6 +41,14 @@ export class AppComponent implements OnInit {
       var x = ''
       this.MS_JSON = data;
       for (i in data['value']) {
+
+        // IDEA: IP address is link to Spur at that IP address -> Need to figure out how to get popup in window
+        //<mat-nav-list fxLayout="row">
+        //<a mat-list-item href="#">One</a>
+        //<a mat-list-item href="#">Two</a>
+    //</mat-nav-list>
+
+
           x += "<p>" + i + "<span class=\"nums\">" + JSON.stringify(data['value'][i]) + "</span>" + "</p>"
       }
       document.getElementById('demo').innerHTML = x
