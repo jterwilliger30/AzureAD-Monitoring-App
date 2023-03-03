@@ -4,7 +4,7 @@
     <div class="toolbar-spacer"></div>
 
     <form>
-      <label *ngIf="loginDisplay">UserID: </label>
+      <label *ngIf="loginDisplay">User ID: </label>
       <input type="text" name="userID" (change)="formChanged()" *ngIf="loginDisplay">
       <button type="button" mat-raised-button *ngIf="loginDisplay" (click)="query_user()">Query</button>
     </form>
@@ -18,4 +18,5 @@
     <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
     <router-outlet *ngIf="!isIframe"></router-outlet>
   </div>
-<router-outlet></router-outlet>
+
+  <app-pie-chart [data]=MS_JSON></app-pie-chart>

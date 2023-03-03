@@ -17,15 +17,20 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field'
 import { MsalModule } from '@azure/msal-angular';
 import { PublicClientApplication } from '@azure/msal-browser';
 
+import { NgChartsModule } from 'ng2-charts';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     HttpClientModule,
     AppRoutingModule,
     MatButtonModule,
